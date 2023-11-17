@@ -3,7 +3,7 @@
 /* Style for the host element */
 :host {
   display: block;
-  font-family: Arial, sans-serif;
+  font-family: Sequel Sans, sans-serif;
   text-align: center;
   padding: 20px;
 }

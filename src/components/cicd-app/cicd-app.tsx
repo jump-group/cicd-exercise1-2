@@ -11,7 +11,8 @@ export class CicdApp {
     return [
       <cicd-header></cicd-header>,
       <cicd-main></cicd-main>,
-      <is-palindrome></is-palindrome>
+      <is-palindrome></is-palindrome>,
+      <cicd-footer></cicd-footer>
     ];
   }
 

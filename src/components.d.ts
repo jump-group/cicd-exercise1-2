@@ -8,6 +8,8 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface CicdApp {
     }
+    interface CicdFooter {
+    }
     interface CicdHeader {
     }
     interface CicdMain {
@@ -21,6 +23,12 @@ declare global {
     var HTMLCicdAppElement: {
         prototype: HTMLCicdAppElement;
         new (): HTMLCicdAppElement;
+    };
+    interface HTMLCicdFooterElement extends Components.CicdFooter, HTMLStencilElement {
+    }
+    var HTMLCicdFooterElement: {
+        prototype: HTMLCicdFooterElement;
+        new (): HTMLCicdFooterElement;
     };
     interface HTMLCicdHeaderElement extends Components.CicdHeader, HTMLStencilElement {
     }
@@ -42,6 +50,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "cicd-app": HTMLCicdAppElement;
+        "cicd-footer": HTMLCicdFooterElement;
         "cicd-header": HTMLCicdHeaderElement;
         "cicd-main": HTMLCicdMainElement;
         "is-palindrome": HTMLIsPalindromeElement;
@@ -49,6 +58,8 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CicdApp {
+    }
+    interface CicdFooter {
     }
     interface CicdHeader {
     }
@@ -58,6 +69,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "cicd-app": CicdApp;
+        "cicd-footer": CicdFooter;
         "cicd-header": CicdHeader;
         "cicd-main": CicdMain;
         "is-palindrome": IsPalindrome;
@@ -68,6 +80,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "cicd-app": LocalJSX.CicdApp & JSXBase.HTMLAttributes<HTMLCicdAppElement>;
+            "cicd-footer": LocalJSX.CicdFooter & JSXBase.HTMLAttributes<HTMLCicdFooterElement>;
             "cicd-header": LocalJSX.CicdHeader & JSXBase.HTMLAttributes<HTMLCicdHeaderElement>;
             "cicd-main": LocalJSX.CicdMain & JSXBase.HTMLAttributes<HTMLCicdMainElement>;
             "is-palindrome": LocalJSX.IsPalindrome & JSXBase.HTMLAttributes<HTMLIsPalindromeElement>;

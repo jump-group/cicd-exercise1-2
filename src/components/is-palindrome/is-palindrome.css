@@ -3,13 +3,13 @@
 /* Main styles for the is-palindrome component */
 main{
   display: block;
-  font-family: Arial, sans-serif;
+  font-family: Sequel Sans, sans-serif;
   padding: 10px;
 }
 
 /* Style for the h2 element */
 main h2 {
-  font-size: 1.5em;
+  font-size: 1.4em;
   color: #5E79BA;
 }
 

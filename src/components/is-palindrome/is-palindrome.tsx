@@ -25,7 +25,7 @@ export class IsPalindrome {
       <h2>E' Palindromo ??</h2>
       <input onInput={(e) => { this.word = (e.target as HTMLInputElement).value }} type='text'></input>
       {this.word?.length ?
-        (this.isPalidrome ? <p>E' palindromo</p> : <p>Non è palindrome</p>)
+        (this.isPalidrome ? <p>E' palindromo</p> : <p>Non è palindromo</p>)
         : null}
     </main>
       ;
