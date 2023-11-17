@@ -45,24 +45,24 @@ jobs:
         continue-on-error: true
         run: aws s3 sync ./www s3://${{ secrets.AWS_BUCKET_FRONT }}/giada --delete --acl public-read
 
-      - name: Notify Failure
-        if:  steps.deploy.outcome != 'success'
-        uses: voxmedia/github-action-slack-notify-build@v1
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-        with:
-          message_id: ${{ steps.slack.outputs.message_id }}
-          channel_id: C049RNZ524T
-          status: FAILED
-          color: danger
+      # - name: Notify Failure
+      #   if:  steps.deploy.outcome != 'success'
+      #   uses: voxmedia/github-action-slack-notify-build@v1
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+      #   with:
+      #     message_id: ${{ steps.slack.outputs.message_id }}
+      #     channel_id: C049RNZ524T
+      #     status: FAILED
+      #     color: danger
 
-      - name: Notify Success
-        if:  steps.deploy.outcome == 'success'
-        uses: voxmedia/github-action-slack-notify-build@v1
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-        with:
-          message_id: ${{ steps.slack.outputs.message_id }}
-          channel_id: C049RNZ524T
-          status: SUCCESS
-          color: good
+      # - name: Notify Success
+      #   if:  steps.deploy.outcome == 'success'
+      #   uses: voxmedia/github-action-slack-notify-build@v1
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+      #   with:
+      #     message_id: ${{ steps.slack.outputs.message_id }}
+      #     channel_id: C049RNZ524T
+      #     status: SUCCESS
+      #     color: good
