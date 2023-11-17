@@ -1,0 +1,68 @@
+name: Deploy Frontend
+
+on: 
+  push:
+    branches: [ development ]
+
+jobs:
+  deploy-staging: 
+    runs-on: ubuntu-latest
+    if:   github.ref == 'refs/heads/development'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache modules
+        uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Run a multi-line script
+        run: |
+          yarn 
+          yarn build
+      
+      - name: Deploy
+        id: deploy
+        continue-on-error: true
+        run: aws s3 sync ./www s3://${{ secrets.AWS_BUCKET_FRONT }}/giada --delete --acl public-read
+
+      - name: Notify Failure
+        if:  steps.deploy.outcome != 'success'
+        uses: voxmedia/github-action-slack-notify-build@v1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+        with:
+          message_id: ${{ steps.slack.outputs.message_id }}
+          channel_id: C049RNZ524T
+          status: FAILED
+          color: danger
+
+      - name: Notify Success
+        if:  steps.deploy.outcome == 'success'
+        uses: voxmedia/github-action-slack-notify-build@v1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+        with:
+          message_id: ${{ steps.slack.outputs.message_id }}
+          channel_id: C049RNZ524T
+          status: SUCCESS
+          color: good
