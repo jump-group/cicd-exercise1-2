@@ -10,7 +10,7 @@ export class CicdHeader {
   render() {
     return (
       <div class="cdciHeader">
-        <img src="../../../assets/images/logo-jump-white.svg" alt="Logo" />
+        <img src="./assets/images/logo-jump-white.svg" alt="Logo" />
       </div>
     );
   }
