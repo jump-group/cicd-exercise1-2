@@ -1,13 +1,13 @@
-name: Deploy Frontend Staging
+name: Deploy Frontend Production
 
 on: 
   push:
-    branches: [ development ]
+    branches: [ master ]
 
 jobs:
-  deploy-staging: 
+  deploy-production: 
     runs-on: ubuntu-latest
-    if:   github.ref == 'refs/heads/development'
+    if:   github.ref == 'refs/heads/master'
 
     steps:
       - uses: actions/checkout@v2
@@ -43,7 +43,7 @@ jobs:
       - name: Deploy
         id: deploy
         continue-on-error: true
-        run: aws s3 sync ./www s3://${{ secrets.AWS_BUCKET_FRONT }}/giada --delete --acl public-read
+        run: aws s3 sync ./www s3://${{ secrets.AWS_BUCKET_FRONT_PROD }}/giada --delete --acl public-read
 
       # - name: Notify Failure
       #   if:  steps.deploy.outcome != 'success'
