@@ -1,4 +1,29 @@
-:host {
+/* is-palindrome.css */
+
+/* Main styles for the is-palindrome component */
+main{
   display: block;
-  padding: 0 16px;
+  font-family: Arial, sans-serif;
+  padding: 10px;
+}
+
+/* Style for the h2 element */
+main h2 {
+  font-size: 1.5em;
+  color: #5E79BA;
+}
+
+/* Style for the input element */
+main input {
+  padding: 8px;
+  margin-top: 0px;
+  width: 300px;
+  font-size: 1em;
+}
+
+/* Style for the p element displaying palindrome status */
+main p {
+  font-size: 1em;
+  color: #666;
+  margin-top: 10px;
 }

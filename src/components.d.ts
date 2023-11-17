@@ -6,10 +6,34 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface CicdApp {
+    }
+    interface CicdHeader {
+    }
+    interface CicdMain {
+    }
     interface IsPalindrome {
     }
 }
 declare global {
+    interface HTMLCicdAppElement extends Components.CicdApp, HTMLStencilElement {
+    }
+    var HTMLCicdAppElement: {
+        prototype: HTMLCicdAppElement;
+        new (): HTMLCicdAppElement;
+    };
+    interface HTMLCicdHeaderElement extends Components.CicdHeader, HTMLStencilElement {
+    }
+    var HTMLCicdHeaderElement: {
+        prototype: HTMLCicdHeaderElement;
+        new (): HTMLCicdHeaderElement;
+    };
+    interface HTMLCicdMainElement extends Components.CicdMain, HTMLStencilElement {
+    }
+    var HTMLCicdMainElement: {
+        prototype: HTMLCicdMainElement;
+        new (): HTMLCicdMainElement;
+    };
     interface HTMLIsPalindromeElement extends Components.IsPalindrome, HTMLStencilElement {
     }
     var HTMLIsPalindromeElement: {
@@ -17,13 +41,25 @@ declare global {
         new (): HTMLIsPalindromeElement;
     };
     interface HTMLElementTagNameMap {
+        "cicd-app": HTMLCicdAppElement;
+        "cicd-header": HTMLCicdHeaderElement;
+        "cicd-main": HTMLCicdMainElement;
         "is-palindrome": HTMLIsPalindromeElement;
     }
 }
 declare namespace LocalJSX {
+    interface CicdApp {
+    }
+    interface CicdHeader {
+    }
+    interface CicdMain {
+    }
     interface IsPalindrome {
     }
     interface IntrinsicElements {
+        "cicd-app": CicdApp;
+        "cicd-header": CicdHeader;
+        "cicd-main": CicdMain;
         "is-palindrome": IsPalindrome;
     }
 }
@@ -31,6 +67,9 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "cicd-app": LocalJSX.CicdApp & JSXBase.HTMLAttributes<HTMLCicdAppElement>;
+            "cicd-header": LocalJSX.CicdHeader & JSXBase.HTMLAttributes<HTMLCicdHeaderElement>;
+            "cicd-main": LocalJSX.CicdMain & JSXBase.HTMLAttributes<HTMLCicdMainElement>;
             "is-palindrome": LocalJSX.IsPalindrome & JSXBase.HTMLAttributes<HTMLIsPalindromeElement>;
         }
     }

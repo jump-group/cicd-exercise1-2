@@ -1,5 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { IsPalindrome } from './is-palindrome';
+import { IsPalindrome } from '../is-palindrome';
 
 describe('is-palindrome', () => {
   it('renders', async () => {
@@ -10,7 +10,7 @@ describe('is-palindrome', () => {
     expect(root).toEqualHtml(`
       <is-palindrome>
         <mock:shadow-root>
-        <main><input type="text"></main>
+        <main><h2>E' Palindromo ??</h2><input type="text"></main>
         </mock:shadow-root>
       </is-palindrome>
     `);

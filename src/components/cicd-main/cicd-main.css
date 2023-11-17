@@ -1,0 +1,22 @@
+/* cicd-main.css */
+
+/* Style for the host element */
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Style for the h1 element */
+h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #ff6f61;
+}
+
+/* Style for the p element */
+ p {
+  font-size: 1.2em;
+  color: #666;
+}

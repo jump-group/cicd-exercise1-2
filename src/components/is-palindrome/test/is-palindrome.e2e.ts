@@ -26,7 +26,7 @@ describe('is-palindrome', () => {
     let inputValue = await input.getProperty('value');
     expect(inputValue).toEqual('anna');
 
-    expect(result).toEqualText('Is a palidrome');
+    expect(result).toEqualText('E\' palindromo');
 
   });
 
@@ -47,7 +47,7 @@ describe('is-palindrome', () => {
     let inputValue = await input.getProperty('value');
     expect(inputValue).toEqual('anne');
 
-    expect(result).toEqualText('Is not a palidrome');
+    expect(result).toEqualText('Non è palindromo');
   });
 
 });

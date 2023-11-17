@@ -1,4 +1,4 @@
-# my-component
+# cicd-app
 
 
 
@@ -7,15 +7,17 @@
 
 ## Dependencies
 
-### Used by
+### Depends on
 
- - [cicd-app](../cicd-app)
+- [cicd-header](../cicd-header)
+- [is-palindrome](../is-palindrome)
 
 ### Graph
 ```mermaid
 graph TD;
+  cicd-app --> cicd-header
   cicd-app --> is-palindrome
-  style is-palindrome fill:#f9f,stroke:#333,stroke-width:4px
+  style cicd-app fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

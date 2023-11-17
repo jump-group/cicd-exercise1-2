@@ -1,4 +1,4 @@
-# my-component
+# cicd-header
 
 
 
@@ -14,8 +14,8 @@
 ### Graph
 ```mermaid
 graph TD;
-  cicd-app --> is-palindrome
-  style is-palindrome fill:#f9f,stroke:#333,stroke-width:4px
+  cicd-app --> cicd-header
+  style cicd-header fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
