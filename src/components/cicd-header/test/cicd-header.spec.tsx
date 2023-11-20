@@ -11,7 +11,7 @@ describe('cicd-header', () => {
       <cicd-header>
         <mock:shadow-root>
         <div class="cdciHeader">
-          <img src="./../assets/images/logo-jump-white.svg" alt="Logo">
+          <img alt="Logo" src="./assets/images/logo-jump-white.svg">
         </div>
         </mock:shadow-root>
       </cicd-header>
