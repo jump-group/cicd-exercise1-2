@@ -69,10 +69,10 @@ jobs:
         if: steps.build.outcome == 'failure'
         run: exit 1
 
-      # run linting
+      # run linting and continue on error
       - name: Lint
-        id: lint
         continue-on-error: true
+        id: lint
         run: yarn lint
 
       # return error if linting fails

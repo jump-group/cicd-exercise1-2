@@ -45,6 +45,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Run a multi-line script
+        continue-on-error: true
         id: build
         run: |
           yarn 
@@ -70,6 +71,7 @@ jobs:
 
       # run linting
       - name: Lint
+        continue-on-error: true
         id: lint
         run: yarn lint
 
@@ -92,6 +94,7 @@ jobs:
       # run tests
       - name: Test
         id: test
+        continue-on-error: true
         run: yarn test
 
       # return error if tests fail
