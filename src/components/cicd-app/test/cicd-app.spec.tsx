@@ -1,4 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
+
 import { CicdApp } from '../cicd-app';
 
 describe('cicd-app', () => {

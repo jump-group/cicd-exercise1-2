@@ -1,4 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
+
 import { CicdMain } from '../cicd-main';
 
 describe('cicd-main', () => {

@@ -1,4 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
+
 import { CicdFooter } from '../cicd-footer';
 
 describe('cicd-footer', () => {

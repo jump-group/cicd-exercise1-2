@@ -1,4 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
+
 import { IsPalindrome } from '../is-palindrome';
 
 describe('is-palindrome', () => {

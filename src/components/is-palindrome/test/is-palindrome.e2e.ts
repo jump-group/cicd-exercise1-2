@@ -23,7 +23,7 @@ describe('is-palindrome', () => {
 
     const result = await page.find('is-palindrome >>> p');
 
-    let inputValue = await input.getProperty('value');
+    const inputValue = await input.getProperty('value');
     expect(inputValue).toEqual('anna');
 
     expect(result).toEqualText('E\' palindromo');
@@ -44,7 +44,7 @@ describe('is-palindrome', () => {
 
     const result = await page.find('is-palindrome >>> p');
 
-    let inputValue = await input.getProperty('value');
+    const inputValue = await input.getProperty('value');
     expect(inputValue).toEqual('anne');
 
     expect(result).toEqualText('Non è palindromo');
