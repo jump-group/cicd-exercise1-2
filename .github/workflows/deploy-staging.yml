@@ -12,6 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Notify Slack
+        uses: voxmedia/github-action-slack-notify-build@v1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+        with:
+          status: STARTED
+          color: good
+          channel_id: ${{ vars.CHANNEL_ID }}
+
       - name: Cache modules
         uses: actions/cache@v1
         id: yarn-cache
@@ -36,33 +45,95 @@ jobs:
         run: npm install -g yarn
 
       - name: Run a multi-line script
+        id: build
         run: |
           yarn 
           yarn build
-      
+
+      # return error if yarn build fails
+      - name: Check for build errors
+        if: steps.build.outcome == 'failure'
+        uses: voxmedia/github-action-slack-notify-build@v1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+        with:
+          status: FAILED
+          color: danger
+          channel_id: ${{ vars.CHANNEL_ID }}
+
+
+      # return error if yarn build fails
+      - name: Check for build errors
+        if: steps.build.outcome == 'failure'
+        run: exit 1
+
+
+      # run linting
+      - name: Lint
+        id: lint
+        run: yarn lint
+
+      # return error if linting fails
+      - name: Check for linting errors
+        if: steps.lint.outcome == 'failure'
+        uses: voxmedia/github-action-slack-notify-build@v1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+        with:
+          status: FAILED
+          color: danger
+          channel_id: ${{ vars.CHANNEL_ID }}
+
+      # return error if linting fails
+      - name: Check for linting errors
+        if: steps.lint.outcome == 'failure'
+        run: exit 1
+
+      # run tests
+      - name: Test
+        id: test
+        run: yarn test
+
+      # return error if tests fail
+      - name: Check for test errors
+        if: steps.test.outcome == 'failure'
+        uses: voxmedia/github-action-slack-notify-build@v1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+        with:
+          status: FAILED
+          color: danger
+          channel_id: ${{ vars.CHANNEL_ID }}
+
+      # return error if tests fail
+      - name: Check for test errors
+        if: steps.test.outcome == 'failure'
+        run: exit 1
+
+      # deploy to s3
       - name: Deploy
         id: deploy
         continue-on-error: true
-        run: aws s3 sync ./www s3://${{ secrets.AWS_BUCKET_FRONT }}/giada --delete --acl public-read
+        run: aws s3 sync ./www s3://${{ secrets.AWS_BUCKET_FRONT_PROD }}/giada --delete --acl public-read
 
-      # - name: Notify Failure
-      #   if:  steps.deploy.outcome != 'success'
-      #   uses: voxmedia/github-action-slack-notify-build@v1
-      #   env:
-      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-      #   with:
-      #     message_id: ${{ steps.slack.outputs.message_id }}
-      #     channel_id: C049RNZ524T
-      #     status: FAILED
-      #     color: danger
+      - name: Notify Failure
+        if:  steps.deploy.outcome != 'success'
+        uses: voxmedia/github-action-slack-notify-build@v1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+        with:
+          message_id: ${{ steps.slack.outputs.message_id }}
+          channel_id: C049RNZ524T
+          status: FAILED
+          color: danger
 
-      # - name: Notify Success
-      #   if:  steps.deploy.outcome == 'success'
-      #   uses: voxmedia/github-action-slack-notify-build@v1
-      #   env:
-      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-      #   with:
-      #     message_id: ${{ steps.slack.outputs.message_id }}
-      #     channel_id: C049RNZ524T
-      #     status: SUCCESS
-      #     color: good
+      - name: Notify Success
+        if:  steps.deploy.outcome == 'success'
+        uses: voxmedia/github-action-slack-notify-build@v1
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+        with:
+          message_id: ${{ steps.slack.outputs.message_id }}
+          channel_id: C049RNZ524T
+          status: SUCCESS
+          color: good
