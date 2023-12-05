@@ -46,6 +46,7 @@ jobs:
 
       - name: Run a multi-line script
         id: build
+        continue-on-error: true
         run: |
           yarn 
           yarn build
@@ -68,10 +69,10 @@ jobs:
         if: steps.build.outcome == 'failure'
         run: exit 1
 
-
       # run linting
       - name: Lint
         id: lint
+        continue-on-error: true
         run: yarn lint
 
       # return error if linting fails
@@ -92,6 +93,7 @@ jobs:
 
       # run tests
       - name: Test
+        continue-on-error: true
         id: test
         run: yarn test
 
